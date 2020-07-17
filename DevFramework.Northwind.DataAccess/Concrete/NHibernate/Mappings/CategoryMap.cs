@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace DevFramework.Northwind.DataAccess.Concrete.NHibernate.Mappings
 {
-    public class CategoryMap : ClassMap<Product>
+    public class CategoryMap : ClassMap<Category>
     {
         public CategoryMap()
         {
             Table(@"Categories");
             LazyLoad();
-            Id(x => x.ProductId).Column("CategoryID");
+            Id(x => x.CategoryId).Column("CategoryID");
 
-            Map(x => x.ProductName).Column("CategoryName");
+            Map(x => x.CategoryName).Column("CategoryName");
         }
     }
 }
