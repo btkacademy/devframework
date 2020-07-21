@@ -29,5 +29,11 @@ namespace DevFramework.Northwind.MvcWebUI.Controllers
             _productService.Add(new Product() { CategoryId = 1,ProductName="Gsm",QuantityPerUnit="1",UnitPrice=21 });
             return "Added";
         }
+        public string AddUpdate()
+        {
+            _productService.TransactionalOperation(new Product() { CategoryId = 1, ProductName = "Pc", QuantityPerUnit = "1", UnitPrice = 21 }
+            , new Product() { CategoryId = 1, ProductName = "Pc2", QuantityPerUnit = "1", UnitPrice = 21,ProductId=2 });//burada unitprice 21 yerine 10 girilirse validasyondan hata alacağı için pc kayıdınıda atamaz TransactionalOperation olduğu için
+            return "Done";
+        }
     }
 }
