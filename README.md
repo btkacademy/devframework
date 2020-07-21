@@ -1,4 +1,14 @@
 # DevFramework
 Profesyonel backend projesi
 
-Resource/Northwind.bak dosyası restore edilebilir
+## Öngereksinimler
+- Resource/Northwind.bak dosyası SQL serverdan restore edilmeli
+
+## Kullanılan kütüphaneler
+- EntityFramework
+- NHibernate
+- FluentValidation
+- log4net
+- Ninject
+- Moq
+- Postsharp

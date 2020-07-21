@@ -1,5 +1,6 @@
 ﻿using DevFramework.Core.Aspects.Postsharp.CacheAspects;
 using DevFramework.Core.Aspects.Postsharp.LogAspects;
+using DevFramework.Core.Aspects.Postsharp.PerformanceAspects;
 using DevFramework.Core.Aspects.Postsharp.TransactionAspects;
 using DevFramework.Core.Aspects.Postsharp.ValidationAspects;
 using DevFramework.Core.CrossCuttingConcerns.Caching.Microsoft;
@@ -34,8 +35,10 @@ namespace DevFramework.Northwind.Business.Concrete.Managers
         }
 
         [CacheAspect(typeof(MemoryCacheManager))]
+        [PerformanceCounterAspect(2)]
         public List<Product> GetAll()
         {
+            System.Threading.Thread.Sleep(3000);
             return _productDal.GetList();
         }
 
