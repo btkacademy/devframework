@@ -12,3 +12,4 @@ Profesyonel backend projesi
 - Ninject
 - Moq
 - Postsharp
+- AutoMapper
