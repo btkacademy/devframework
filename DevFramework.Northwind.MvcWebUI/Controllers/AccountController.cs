@@ -1,4 +1,5 @@
 ﻿using DevFramework.Core.CrossCuttingConcerns.Security.Web;
+using DevFramework.Northwind.Business.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +10,28 @@ namespace DevFramework.Northwind.MvcWebUI.Controllers
 {
     public class AccountController : Controller
     {
-        // GET: Account
-        public string Login()
+        IUserService _userService;
+        public AccountController(IUserService userService)
         {
-            AuthenticationHelper.CreateAuthCookie(
-                    Guid.NewGuid()
-                    , "ahmetfarukulu"
-                    , "ahmetfarukulu@gmail.com"
-                    , DateTime.Now.AddMinutes(1)
-                    , new[] { "Editor" }
-                    , false
-                    , "Ahmet Faruk"
-                    , "Ulu");
-            return "User is authenticated!";
+            _userService = userService;
+        }
+        public string Login(string userName,string password)
+        {
+            var user = _userService.GetByUsernameAndPassword(userName, password);
+            if (user != null)
+            {
+                AuthenticationHelper.CreateAuthCookie(
+                  Guid.NewGuid()
+                  , user.UserName
+                  , user.Email
+                  , DateTime.Now.AddDays(15)
+                  , _userService.GetUserRoles(user).Select(u=>u.RoleName).ToArray()
+                  , false
+                  , user.FirstName
+                  , user.LastName);
+                return "User is authenticated!";
+            }
+            return "User is not authenticated!";
         }
     }
 }
